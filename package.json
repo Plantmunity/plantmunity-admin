@@ -1,0 +1,40 @@
+{
+  "name": "plantmunity-admin-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "plantmunity-admin-frontend",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@hookform/resolvers": "^2.9.8",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/material": "^5.10.10",
+    "@reduxjs/toolkit": "^1.8.6",
+    "gatsby": "^4.24.4",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-image": "^2.24.0",
+    "gatsby-plugin-manifest": "^4.24.0",
+    "gatsby-plugin-sharp": "^4.24.0",
+    "gatsby-source-filesystem": "^4.24.0",
+    "gatsby-transformer-sharp": "^4.24.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.38.0",
+    "react-icons": "^4.6.0",
+    "react-redux": "^8.0.4",
+    "react-toastify": "^9.0.8",
+    "redux": "^4.2.0",
+    "yup": "^0.32.11"
+  }
+}
