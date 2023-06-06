@@ -1,76 +1,84 @@
-import React from 'react'
-import { Grid, Stack, Box, Typography } from '@mui/material'
+import React from "react";
+import { Grid, Stack, Box, Typography } from "@mui/material";
 
 //For Responsivity
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { useTheme } from '@mui/material/styles'
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
-const CounterCards = ({ title, location, value, icon, cardspace}) => {
-    const theme = useTheme();
-    const tablet = useMediaQuery(theme.breakpoints.down(1050));
-    const mobile = useMediaQuery(theme.breakpoints.down(600));
-    return (
-        <Grid
-            item
-            sx={{
-                width: mobile ? "100%" : tablet ? "47%" : "23%",
-                height: 150,
-                mt: 2,
-                ml: cardspace,
-                borderRadius: 3,
-                overflow: "hidden",
-                bgcolor: "white",
-                boxShadow: '2.0px 6.0px 6.0px hsl(0deg 0% 0% / 0.38)',
-            }}
+const CounterCards = ({ title, location, value, icon, cardspace }) => {
+  const theme = useTheme();
+  const tablet = useMediaQuery(theme.breakpoints.down(1050));
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  return (
+    <Grid
+      item
+      sx={{
+        width: mobile ? "100%" : tablet ? "50%" : "25%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: "95%",
+          height: 150,
+          mt: 2,
+          borderRadius: 3,
+          overflow: "hidden",
+          bgcolor: "white",
+          boxShadow: "2.0px 6.0px 6.0px hsl(0deg 0% 0% / 0.38)",
+        }}
+      >
+        <Stack
+          direction="row"
+          alignItems="center"
+          sx={{
+            width: "100%",
+            height: "100%",
+          }}
         >
-            <Stack
-                direction="row"
-                alignItems="center"
-                sx={{
-                    width: "100%",
-                    height: "100%",
-                }}
+          <Box sx={{ width: 25, height: 150, bgcolor: "#5c6d63" }} />
+
+          <Stack
+            direction="column"
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              p: 3,
+              flexDirection: "column",
+            }}
+          >
+            <Typography
+              variant="h7"
+              sx={{
+                fontFamily: "Raleway",
+                fontWeight: "Light",
+                display: "flex",
+              }}
             >
-                <Box sx={{ width: 25, height: 150, bgcolor: "#5c6d63" }} />
+              {title}
+            </Typography>
+            <Typography
+              variant="h2"
+              sx={{
+                width: "100%",
+                fontFamily: "Raleway",
+                fontWeight: "Bold",
+                display: "flex",
+                flexGrow: 1,
+              }}
+            >
+              {value}
+            </Typography>
+          </Stack>
 
-                <Stack
-                    direction="column"
-                    sx={{
-                        width: "100%",
-                        height: '100%',
-                        display: "flex",
-                        p: 3,
-                        flexDirection: "column",
-                    }}>
-                    <Typography
-                        variant='h7'
-                        sx={{
-                            fontFamily: 'Raleway',
-                            fontWeight: "Light",
-                            display: "flex"
-                        }} >
-                        {title}
-                    </Typography>
-                    <Typography
-                        variant='h2'
-                        sx={{
-                            width: "100%",
-                            fontFamily: 'Raleway',
-                            fontWeight: "Bold",
-                            display: "flex",
-                            flexGrow: 1
-                        }} >
-                        {value}
-                    </Typography>
+          {icon}
+        </Stack>
+      </Box>
+    </Grid>
+  );
+};
 
-                </Stack>
-
-                {icon}
-
-            </Stack>
-
-        </Grid>
-    )
-}
-
-export default CounterCards
+export default CounterCards;

@@ -1,128 +1,202 @@
-import React from 'react'
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { bgcolor } from '@mui/system';
-import { Divider, Typography } from '@mui/material';
+import React from "react";
+import { Box, Stack } from "@mui/material/";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Button, Divider, Typography } from "@mui/material";
 
-const columns = [
+import { useGetConcernsQuery } from "../../app/services/landingApi";
+
+export default function InquiryTable({ handleGoTo }) {
+  const { data } = useGetConcernsQuery(undefined, {
+    refetchOnMountOrArgChange: "true",
+    pollingInterval: 10000,
+  });
+
+  const concernsArray = data ? data.concerns : [];
+
+  const columns = [
     {
-        id: 'name',
-        label: 'Name',
-        minWidth: 170,
-        align: "center"
+      id: "name",
+      label: "Name",
+      minWidth: 170,
+      align: "center",
     },
     {
-        id: 'address',
-        label: 'Address',
-        minWidth: 100,
-        align: "center"
+      id: "email",
+      label: "Email",
+      minWidth: 170,
+      align: "center",
     },
     {
-        id: 'email',
-        label: 'Email',
-        minWidth: 170,
-        align: 'center'
+      id: "contact",
+      label: "Contact",
+      minWidth: 100,
+      align: "center",
     },
     {
-        id: 'contactNumber',
-        label: 'Contact Number',
-        minWidth: 170,
-        align: 'center'
+      id: "subject",
+      label: "Subject",
+      minWidth: 170,
+      align: "center",
     },
     {
-        id: 'date',
-        label: 'Date',
-        minWidth: 170,
-        align: 'center'
+      id: "date",
+      label: "Date",
+      minWidth: 170,
+      align: "center",
     },
-];
+  ];
 
-function createData(name, address, email, contactNumber, date, details) {
-    return { name, address, email, contactNumber, date, details }
-}
-
-const rows = [
-    createData("Roxene Lee", "Luzville Subdivision", "rlee@gmail.com", "+639533887478", "3/27/2023", "sample detail"),
-    createData("Roxene Lee", "Luzville Subdivision", "rlee@gmail.com", "+639533887478", "3/27/2023", "sample detail"),
-    createData("Roxene Lee", "Luzville Subdivision", "rlee@gmail.com", "+639533887478", "3/27/2023", "sample detail"),
-
-]
-
-
-export default function InquiryTable() {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(0);
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+  function createData(
+    id,
+    first_name,
+    last_name,
+    email,
+    contact,
+    subject,
+    message,
+    created_at
+  ) {
+    return {
+      id,
+      first_name,
+      last_name,
+      email,
+      contact,
+      subject,
+      message,
+      created_at,
     };
+  }
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+  const rows = concernsArray.map(
+    ({
+      id,
+      first_name,
+      last_name,
+      email,
+      contact,
+      subject,
+      message,
+      created_at,
+    }) => {
+      return createData(
+        id,
+        first_name,
+        last_name,
+        email,
+        contact,
+        subject,
+        message,
+        created_at
+      );
+    }
+  );
 
-    return (
-        <Paper
-            sx={{
-                width: "100%",
-                overFlow: "hidden"
-            }}
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        overFlow: "hidden",
+      }}
+    >
+      <Stack direction="row" alignItems="center" sx={{ p: 3 }}>
+        <Typography
+          variant="h5"
+          sx={{
+            fontFamily: "Raleway",
+            fontWeight: "Bold",
+            flexGrow: 1,
+          }}
         >
-            <Typography
-                variant='h5'
-                sx={{
-                    fontFamily: 'Raleway',
-                    fontWeight: "Bold",
-                    ml: 3,
-                    mt: 3,
-                    mb: 3
-                }}
-            >
-                Manage Inquiries
-            </Typography>
+          Manage Inquiries
+        </Typography>
+        <Button
+          onClick={() => handleGoTo(2)}
+          sx={{
+            bgcolor: "transparent",
+            color: "green",
+            border: "none",
+            fontFamily: "Raleway",
+            textTransform: "none",
+          }}
+        >
+          View more
+        </Button>
+      </Stack>
 
-            <Divider />
+      <Divider />
 
-            <TableContainer sx={{ maxHeight: 440 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead bgcolor="green">
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth, backgroundColor: 'white' }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.name} >
-                                <TableCell component="th" scope="row" align="center">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell align="center">{row.address}</TableCell>
-                                <TableCell align="center">{row.email}</TableCell>
-                                <TableCell align="center">{row.contactNumber}</TableCell>
-                                <TableCell align="center">{row.date}</TableCell>
-                            </TableRow>
-                        ))}
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead bgcolor="green">
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: "white",
+                    fontFamily: "raleway",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => {
+              const time_stamp = new Date(row.created_at);
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+              function getMonthName(monthNumber) {
+                const date = new Date();
+                date.setMonth(monthNumber - 1);
 
+                return date.toLocaleString("en-US", { month: "long" });
+              }
 
-        </Paper>
-    )
+              const date =
+                getMonthName(time_stamp.getMonth() + 1) +
+                " " +
+                time_stamp.getDate() +
+                ", " +
+                time_stamp.getFullYear();
+
+              return (
+                <TableRow key={row.id}>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    sx={{ fontFamily: "Raleway" }}
+                  >
+                    {row.first_name + " " + row.last_name}
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                    {row.email}
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                    {row.contact}
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                    {row.subject}
+                  </TableCell>
+                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                    {date}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  );
 }
