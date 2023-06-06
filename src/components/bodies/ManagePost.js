@@ -264,6 +264,7 @@ const ManagePost = ({ toast }) => {
                   <Box sx={{ width: "100%", height: 150 }}>
                     <img
                       src={image}
+                      alt={"post_photo"}
                       style={{
                         objectFit: "contain",
                         width: "100%",
@@ -501,6 +502,7 @@ const ManagePost = ({ toast }) => {
                   <Box sx={{ width: "100%", height: 150 }}>
                     <img
                       src={image}
+                      alt={"post_photo"}
                       style={{
                         objectFit: "contain",
                         width: "100%",

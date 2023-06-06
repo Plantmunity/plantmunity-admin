@@ -54,11 +54,7 @@ const EditUserForm = ({
   const [userWarn, setUserWarn] = useState("");
 
   //For react hook form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema1),
   });
 
@@ -69,7 +65,7 @@ const EditUserForm = ({
       id: ID,
       data: data,
     };
-    console.log(input);
+
     updateUserDetail(input)
       .then((payload) => {
         if (payload?.data?.status === 401) {

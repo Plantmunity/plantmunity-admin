@@ -21,7 +21,7 @@ export default function ManageFAQs({ toast }) {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
 
-  const { data, isFetching } = useGetFaqsQuery(undefined, {
+  const { data } = useGetFaqsQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 

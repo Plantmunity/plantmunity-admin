@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { navigate, Link } from "gatsby";
+import { navigate } from "gatsby";
 import React, { useLayoutEffect, useState } from "react";
 import Logo from "../../images/Plantmunity.png";
 import EmailVerificationDialog from "../dialogs/EmailVerificationDialog";

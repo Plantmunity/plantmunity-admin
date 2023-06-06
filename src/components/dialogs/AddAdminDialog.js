@@ -46,11 +46,7 @@ const AddAdminDialog = ({ toast, handleClose }) => {
 
   const [addAdmin] = useAddAdminMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 

@@ -136,6 +136,7 @@ const AddReportNoteDialog = ({
             {...register("remove_note")}
             multiline
             required
+            value={note}
             onChange={(event) => setNote(event.target.value)}
             label={"Note"}
             minRows={6}

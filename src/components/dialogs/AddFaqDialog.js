@@ -28,11 +28,7 @@ const AddFaqDialog = ({ toast, handleClose }) => {
 
   const [addFaq] = useAddFaqMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 

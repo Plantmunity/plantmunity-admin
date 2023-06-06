@@ -171,6 +171,7 @@ export default function ReportedPostTable({ handleClick }) {
                       }}
                     >
                       <img
+                        alt={"post_photo"}
                         src={row.image}
                         style={{
                           width: "90%",

@@ -16,7 +16,7 @@ const Welcome = () => {
         navigate("/admin");
       }
     }, 3000);
-  }, [isSuccess]);
+  }, [isSuccess, setUser]);
 
   return (
     <Grid

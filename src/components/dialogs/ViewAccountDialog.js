@@ -71,7 +71,7 @@ const ViewAccountDialog = ({ toast, handleClose }) => {
 
   //Redux Static Values (User details -> userSlice.js)
 
-  const { data, isFetching } = useGetUserQuery(undefined, {
+  const { data } = useGetUserQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
   //console.log(data)
@@ -137,7 +137,7 @@ const ViewAccountDialog = ({ toast, handleClose }) => {
     console.log(userData);
 
     dispatch(setPersonalDetails(userData));
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <Stack

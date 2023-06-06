@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid, Stack, Box, Divider, Typography } from "@mui/material";
 
 //For Responsivity
@@ -15,7 +15,7 @@ export default function FeedbackViewer({ toast }) {
   const tablet = useMediaQuery(theme.breakpoints.down(1000));
   const medium = useMediaQuery(theme.breakpoints.down(1200));
 
-  const { data, isFetching } = useGetFeedbacksQuery(undefined, {
+  const { data } = useGetFeedbacksQuery(undefined, {
     refetchOnMountOrArgChange: true,
   });
 

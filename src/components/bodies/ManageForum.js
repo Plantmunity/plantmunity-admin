@@ -270,6 +270,7 @@ const ManageForum = ({ toast }) => {
                   <Box sx={{ width: "100%", height: 150 }}>
                     <img
                       src={image}
+                      alt={"forum_photo"}
                       style={{
                         objectFit: "contain",
                         width: "100%",
@@ -529,6 +530,7 @@ const ManageForum = ({ toast }) => {
                   <Box sx={{ width: "100%", height: 150 }}>
                     <img
                       src={image}
+                      alt={"forum_photo"}
                       style={{
                         objectFit: "contain",
                         width: "100%",

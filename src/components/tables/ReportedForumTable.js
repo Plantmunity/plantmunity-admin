@@ -176,6 +176,7 @@ export default function ReportedForumTable({ handleClick }) {
                       }}
                     >
                       <img
+                        alt={"forum_photo"}
                         src={row.image}
                         style={{
                           width: "90%",

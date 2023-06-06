@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Divider, IconButton, Stack } from "@mui/material/";
+import { Box, Divider, Stack } from "@mui/material/";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -191,6 +191,7 @@ export default function PostsTable({ handleClick }) {
                       }}
                     >
                       <img
+                        alt={"post_photo"}
                         src={row.image}
                         style={{
                           width: "90%",

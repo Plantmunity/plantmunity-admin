@@ -1,4 +1,4 @@
-import { Grid, Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import LoginForm from "../forms/LoginForm";
 import useMediaQuery from "@mui/material/useMediaQuery";

@@ -34,11 +34,7 @@ const EditFaqDialog = ({ toast, handleClose, ans, questn, stat, id }) => {
 
   const [updateFaq] = useUpdateFaqMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 

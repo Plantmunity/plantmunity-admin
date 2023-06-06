@@ -163,6 +163,7 @@ const ManageProduct = ({ toast }) => {
               >
                 <Box sx={{ width: "100%", height: 150 }}>
                   <img
+                    alt={"product_photo"}
                     src={image}
                     style={{
                       objectFit: "contain",

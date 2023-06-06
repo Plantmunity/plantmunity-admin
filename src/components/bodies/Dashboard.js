@@ -21,7 +21,7 @@ const Dashboard = ({ handleGoTo }) => {
   const mobile = useMediaQuery(theme.breakpoints.down(600));
 
   const type = useSelector((state) => state.user.type);
-  const { data, isFetching } = useGetDashboardQuery(undefined, {
+  const { data } = useGetDashboardQuery(undefined, {
     refetchOnMountOrArgChange: "true",
     pollingInterval: 5000,
   });

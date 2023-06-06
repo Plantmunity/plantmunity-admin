@@ -41,11 +41,7 @@ const EditUserContactForm = ({
   const [emailWarn, setEmailWarn] = useState("");
 
   //For react hook form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema1),
   });
 
@@ -57,7 +53,6 @@ const EditUserContactForm = ({
       data: data,
     };
 
-    console.log(input);
     updateContact(input)
       .then((payload) => {
         if (payload?.data?.status === 401) {
