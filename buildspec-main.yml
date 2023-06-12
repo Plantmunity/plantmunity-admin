@@ -13,7 +13,7 @@ phases:
   post_build:
     commands:
       - 'aws s3 sync "public/" "s3://admin.plantmunity.me" --delete --acl "public-read"'
-      - 'aws cloudfront create-invalidation --distribution-id E239V2ZXRCZHF0 --paths "/*"'
+      - 'aws cloudfront create-invalidation --distribution-id E3LEZSR79Y5EHB --paths "/*"'
 artifacts:
   base-directory: public
   files:
