@@ -12,8 +12,8 @@ phases:
       - "npm run build"
   post_build:
     commands:
-      - 'aws s3 sync "public/" "s3://admin.plantmunity" --delete --acl "public-read"'
-      - 'aws cloudfront create-invalidation --distribution-id E1SLOYKFLXNGEJ --paths "/*"'
+      - 'aws s3 sync "public/" "s3://admin.plantmunity.me" --delete --acl "public-read"'
+      - 'aws cloudfront create-invalidation --distribution-id E239V2ZXRCZHF0 --paths "/*"'
 artifacts:
   base-directory: public
   files:
