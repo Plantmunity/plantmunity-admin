@@ -43,7 +43,7 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#5C6D63`,
         display: `standalone`,
-        icon: "src/images/PlantmunityIconAlt.png",
+        icon: "src/images/PlantmunityIcon.png",
       },
     },
   ],
