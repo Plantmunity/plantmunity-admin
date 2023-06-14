@@ -14,7 +14,7 @@ import {
 } from "../../app/services/landingApi";
 import PendingConcernDialog from "../dialogs/PendingConcernDialog";
 
-export default function PendingInquiryTable() {
+export default function PendingInquiryTable({ toast }) {
   const [openDialog, setOpenDialog] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -217,6 +217,7 @@ export default function PendingInquiryTable() {
 
       <Dialog open={openDialog} scroll={"body"} maxWidth={false}>
         <PendingConcernDialog
+          toast={(message) => toast(message)}
           handleSent={() => setOpenDialog(!openDialog)}
           handleClose={() => handleDialog()}
           id={id}

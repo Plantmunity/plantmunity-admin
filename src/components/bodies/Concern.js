@@ -6,7 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import PendingInquiryTable from "../tables/PendingInquiryTable";
 import ProcessedConcernTable from "../tables/ProcessedInquiryTable";
-const Concern = () => {
+const Concern = ({ toast }) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
 
@@ -77,7 +77,7 @@ const Concern = () => {
             boxShadow: "2.0px 6.0px 6.0px hsl(0deg 0% 0% / 0.38)",
           }}
         >
-          <PendingInquiryTable />
+          <PendingInquiryTable toast={(message) => toast(message)} />
         </Box>
       ) : (
         <Box

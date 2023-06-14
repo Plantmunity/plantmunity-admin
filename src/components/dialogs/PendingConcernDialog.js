@@ -7,7 +7,7 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-
+import { ClipLoader } from "react-spinners";
 import { MdCancel } from "react-icons/md";
 import React, { useState } from "react";
 
@@ -29,8 +29,10 @@ const PendingConcernDialog = ({
   const { handleSubmit } = useForm();
 
   const [updateConcern] = useUpdateConcernMutation();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = () => {
+    setLoading(true);
     const input = {
       id: id,
       data: {
@@ -42,10 +44,11 @@ const PendingConcernDialog = ({
 
     updateConcern(input)
       .then((payload) => {
-        console.log(payload);
+        setLoading(false);
         handleSent();
       })
       .catch((error) => {
+        setLoading(false);
         console.error("rejected", error);
       });
   };
@@ -187,7 +190,7 @@ const PendingConcernDialog = ({
               variant="contained"
               sx={{ width: "100%", mt: 1, color: "white" }}
             >
-              Send
+              {loading ? <ClipLoader color={"white"} size={25} /> : "Send"}
             </Button>
           </form>
         </Stack>
