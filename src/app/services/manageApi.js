@@ -27,6 +27,7 @@ export const manageApi = createApi({
     "Forums",
     "Products",
     "Admins",
+    "Ads",
   ],
   endpoints(build) {
     return {
@@ -255,6 +256,49 @@ export const manageApi = createApi({
         },
         providesTags: ["Products"],
       }),
+
+      getAllAds: build.query({
+        query(term) {
+          return {
+            url: `admin/ads/all`,
+            method: "GET",
+          };
+        },
+        providesTags: ["Ads"],
+      }),
+
+      addAds: build.mutation({
+        query(data) {
+          return {
+            url: `admin/ads/store`,
+            method: "POST",
+            body: data,
+          };
+        },
+        invalidatesTags: ["Ads"],
+      }),
+
+      updateAds: build.mutation({
+        query(body) {
+          const { data, id } = body;
+          return {
+            url: `admin/ads/${id}/update`,
+            method: "PATCH",
+            body: data,
+          };
+        },
+        invalidatesTags: ["Ads"],
+      }),
+
+      deleteAds: build.mutation({
+        query(id) {
+          return {
+            url: `admin/ads/${id}/delete`,
+            method: "PATCH",
+          };
+        },
+        invalidatesTags: ["Ads"],
+      }),
     };
   },
 });
@@ -265,6 +309,11 @@ export const {
   useDeactivateAdminMutation,
   useDeleteAdminMutation,
   useReactivateAdminMutation,
+
+  useAddAdsMutation,
+  useDeleteAdsMutation,
+  useUpdateAdsMutation,
+  useGetAllAdsQuery,
 
   useGetReportedAccountsQuery,
   useGetUsersAccountsQuery,

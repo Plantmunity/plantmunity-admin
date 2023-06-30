@@ -18,8 +18,8 @@ import { useSelector } from "react-redux";
 
 const Dashboard = ({ handleGoTo }) => {
   const theme = useTheme();
-  const mobile = useMediaQuery(theme.breakpoints.down(600));
-
+  const mobile = useMediaQuery(theme.breakpoints.down(mobile ? 50 : 600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
   const type = useSelector((state) => state.user.type);
   const { data } = useGetDashboardQuery(undefined, {
     refetchOnMountOrArgChange: "true",
@@ -29,7 +29,7 @@ const Dashboard = ({ handleGoTo }) => {
   return (
     <Stack direction="column" sx={{ width: "100%" }}>
       <Typography
-        variant="h4"
+        variant={mobile ? "body1" : small ? "h6" : "h4"}
         sx={{
           fontFamily: "Arvo",
           fontWeight: "bold",
@@ -53,12 +53,11 @@ const Dashboard = ({ handleGoTo }) => {
           <CounterCards
             title={"Active Users"}
             value={data?.active_users}
-            cardspace={0}
             icon={
               <FaUserShield
                 style={{
-                  width: 60,
-                  height: 60,
+                  width: mobile ? 50 : 60,
+                  height: mobile ? 50 : 60,
                   color: "#bfcba5",
                   marginRight: 20,
                 }}
@@ -70,12 +69,11 @@ const Dashboard = ({ handleGoTo }) => {
         <CounterCards
           title={"Active Admins"}
           value={data?.active_admins}
-          cardspace={type === "Moderator" ? 0 : 3}
           icon={
             <MdAdminPanelSettings
               style={{
-                width: 60,
-                height: 60,
+                width: mobile ? 50 : 60,
+                height: mobile ? 50 : 60,
                 color: "#bfcba5",
                 marginRight: 20,
               }}
@@ -85,14 +83,13 @@ const Dashboard = ({ handleGoTo }) => {
 
         {type === "SA" || type === "Admin" ? (
           <CounterCards
-            title={"Pending Enquiry"}
+            title={"Inquiries"}
             value={data?.concerns}
-            cardspace={3}
             icon={
               <HelpRoundedIcon
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: mobile ? 30 : 40,
+                  height: mobile ? 30 : 40,
                   color: "#bfcba5",
                   marginRight: 20,
                 }}
@@ -105,12 +102,11 @@ const Dashboard = ({ handleGoTo }) => {
           <CounterCards
             title={"Unverified Products"}
             value={data?.unverified_products}
-            cardspace={3}
             icon={
               <RiPlantFill
                 style={{
-                  width: 60,
-                  height: 60,
+                  width: mobile ? 50 : 60,
+                  height: mobile ? 50 : 60,
                   color: "#bfcba5",
                   marginRight: 20,
                 }}
@@ -123,11 +119,10 @@ const Dashboard = ({ handleGoTo }) => {
           <CounterCards
             title={"Reported Posts"}
             value={data?.reported_posts}
-            cardspace={3}
             icon={
               <BsFillFilePostFill
                 style={{
-                  width: 60,
+                  width: mobile ? 50 : 60,
                   height: 45,
                   color: "#bfcba5",
                   marginRight: 20,
@@ -141,12 +136,11 @@ const Dashboard = ({ handleGoTo }) => {
           <CounterCards
             title={"Reported Users"}
             value={data?.reported_users}
-            cardspace={3}
             icon={
               <MdReportProblem
                 style={{
-                  width: 60,
-                  height: 60,
+                  width: mobile ? 50 : 60,
+                  height: mobile ? 50 : 60,
                   color: "#bfcba5",
                   marginRight: 20,
                 }}
@@ -159,7 +153,6 @@ const Dashboard = ({ handleGoTo }) => {
           <CounterCards
             title={"Reported Forum"}
             value={data?.reported_forums}
-            cardspace={3}
             icon={
               <ForumRoundedIcon
                 style={{
@@ -177,7 +170,7 @@ const Dashboard = ({ handleGoTo }) => {
       <Grid
         sx={{
           width: "100%",
-          height: 340,
+          height: 440,
           mt: 4,
           borderRadius: 3,
           overflow: "hidden",

@@ -11,7 +11,15 @@ import { SearchRounded } from "@mui/icons-material";
 import { useGetAdminAccountsQuery } from "../../app/services/manageApi";
 import AdminActionDialog from "../dialogs/AdminActionDialog";
 
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 export default function ManageAdminTable({ toast }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [search, setSearch] = useState("");
   const [finalSearch, setFinalSearch] = useState("");
 
@@ -64,43 +72,43 @@ export default function ManageAdminTable({ toast }) {
     {
       id: "profile",
       label: "Profile",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "name",
       label: "Name",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "email",
       label: "Email",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "contact",
       label: "Contact",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "address",
       label: "Address",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "role",
       label: "Role",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "status",
       label: "Status",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
   ];
@@ -187,7 +195,7 @@ export default function ManageAdminTable({ toast }) {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: mobile ? "center" : "flex-end",
           px: 2,
         }}
       >
@@ -209,7 +217,12 @@ export default function ManageAdminTable({ toast }) {
           <SearchRounded sx={{ color: "gray" }} />
           <SearchField
             variant="outlined"
-            inputProps={{ style: { fontFamily: "raleway" } }}
+            inputProps={{
+              style: {
+                fontFamily: "raleway",
+                fontSize: mobile ? 10 : small ? 14 : 18,
+              },
+            }}
             placeholder={"Search user"}
             value={search}
             onChange={handleSearchChange}
@@ -218,7 +231,7 @@ export default function ManageAdminTable({ toast }) {
         </Stack>
       </Box>
       <Divider />
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -230,6 +243,7 @@ export default function ManageAdminTable({ toast }) {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -262,7 +276,10 @@ export default function ManageAdminTable({ toast }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     <Stack
                       direction="column"
@@ -280,27 +297,60 @@ export default function ManageAdminTable({ toast }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     {row.first_name + " " + row.last_name}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.email}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.contact}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.address}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.type === "SA"
                       ? "Super Admin"
                       : row.type === "Moderator"
                       ? "Content Moderator"
                       : "User Admin"}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.status}
                   </TableCell>
                 </TableRow>

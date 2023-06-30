@@ -11,6 +11,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material/";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import List from "@mui/material/List";
@@ -36,7 +37,7 @@ import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import HelpRoundedIcon from "@mui/icons-material/HelpRounded";
 import LiveHelpRoundedIcon from "@mui/icons-material/LiveHelpRounded";
 import { RiPlantFill } from "react-icons/ri";
-import { BsFillFilePostFill } from "react-icons/bs";
+import { BsFillFilePostFill, BsMegaphoneFill } from "react-icons/bs";
 import { MdFeedback } from "react-icons/md";
 import { Stack } from "@mui/material";
 import Logo from "../../images/Background.png";
@@ -56,6 +57,7 @@ import ManageProduct from "../bodies/ManageProduct";
 import ManageFAQs from "../bodies/ManageFAQs";
 import FeedbackViewer from "../bodies/FeedbackViewer";
 import ViewAccountDialog from "../dialogs/ViewAccountDialog";
+import ManageAdvertisement from "../bodies/ManageAdvertisement";
 
 const drawerWidth = 240;
 
@@ -126,6 +128,9 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Sidebar() {
   const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedvalue] = useState(1);
 
@@ -218,6 +223,11 @@ export default function Sidebar() {
       title: "Admin Accounts",
     },
     {
+      type: "all",
+      id: 10,
+      title: "Advertisements",
+    },
+    {
       type: "SA-Admin",
       id: 8,
       title: "FAQs Management",
@@ -278,7 +288,7 @@ export default function Sidebar() {
       return (
         <PersonRoundedIcon
           sx={{
-            fontSize: 25,
+            fontSize: 26,
             color: selectedValue === 6 ? "#bfcba5" : "#5c6d63",
           }}
         />
@@ -295,6 +305,15 @@ export default function Sidebar() {
           style={{
             fontSize: 23,
             color: selectedValue === 9 ? "#bfcba5" : "#5c6d63",
+          }}
+        />
+      );
+    } else if (menuItem === 10) {
+      return (
+        <BsMegaphoneFill
+          style={{
+            fontSize: 19,
+            color: selectedValue === 10 ? "#bfcba5" : "#5c6d63",
           }}
         />
       );
@@ -340,7 +359,7 @@ export default function Sidebar() {
             alignItems="center"
             sx={{ width: "100%", height: 60 }}
           >
-            <Box sx={{ height: 45, width: 130 }}>
+            <Box sx={{ height: 45, width: 120 }}>
               <img
                 src={Logo}
                 alt="plantmunity logo"
@@ -481,7 +500,7 @@ export default function Sidebar() {
           )}
         </List>
       </Drawer>
-      <Box component="main" sx={{ width: "100%", p: 3, pt: 0 }}>
+      <Box component="main" sx={{ width: small ? "90%" : "100%", p: 3, pt: 0 }}>
         <DrawerHeader />
 
         {selectedValue === 1 ? (
@@ -502,6 +521,8 @@ export default function Sidebar() {
           <ManageFAQs toast={(message) => notify(message)} />
         ) : selectedValue === 9 ? (
           <FeedbackViewer toast={(message) => notify(message)} />
+        ) : selectedValue === 10 ? (
+          <ManageAdvertisement toast={(message) => notify(message)} />
         ) : null}
       </Box>
 

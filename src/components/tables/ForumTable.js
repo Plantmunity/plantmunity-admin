@@ -10,7 +10,15 @@ import { SearchField } from "../basic/StyledComponents";
 import { SearchRounded } from "@mui/icons-material";
 import { useGetPostedForumQuery } from "../../app/services/manageApi";
 
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 export default function ForumTable({ handleClick }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [search, setSearch] = useState("");
   const [finalSearch, setFinalSearch] = useState("");
 
@@ -42,31 +50,31 @@ export default function ForumTable({ handleClick }) {
     {
       id: "image",
       label: "Image",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "user",
       label: "User ID",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "title",
       label: "Title",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "status",
       label: "Status",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "date",
       label: "Posted on",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
   ];
@@ -109,7 +117,7 @@ export default function ForumTable({ handleClick }) {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: mobile ? "center" : "flex-end",
           px: 2,
         }}
       >
@@ -130,7 +138,12 @@ export default function ForumTable({ handleClick }) {
           <SearchRounded sx={{ color: "gray" }} />
           <SearchField
             variant="outlined"
-            inputProps={{ style: { fontFamily: "raleway" } }}
+            inputProps={{
+              style: {
+                fontFamily: "raleway",
+                fontSize: mobile ? 10 : small ? 14 : 18,
+              },
+            }}
             placeholder={"Search forum"}
             value={search}
             onChange={handleSearchChange}
@@ -139,7 +152,7 @@ export default function ForumTable({ handleClick }) {
         </Stack>
       </Box>
       <Divider />
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ minHeight: 440, maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -151,6 +164,7 @@ export default function ForumTable({ handleClick }) {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -195,7 +209,10 @@ export default function ForumTable({ handleClick }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     <Box
                       sx={{
@@ -217,16 +234,40 @@ export default function ForumTable({ handleClick }) {
                       />
                     </Box>
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.user?.id}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.title}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.status}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {date}
                   </TableCell>
                 </TableRow>

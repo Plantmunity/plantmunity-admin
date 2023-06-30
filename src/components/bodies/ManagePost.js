@@ -26,6 +26,8 @@ import AddReportNoteDialog from "../dialogs/AddReportNoteDialog";
 const ManagePost = ({ toast }) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+  const medium = useMediaQuery(theme.breakpoints.down(1100));
 
   const [openNote, setOpenNote] = useState(false);
 
@@ -115,7 +117,7 @@ const ManagePost = ({ toast }) => {
     <Box sx={{ width: "100%" }}>
       <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
         <Typography
-          variant="h4"
+          variant={mobile ? "body1" : small ? "h6" : "h4"}
           sx={{
             fontFamily: "Arvo",
             fontWeight: "bold",
@@ -130,13 +132,13 @@ const ManagePost = ({ toast }) => {
           value={value}
           onChange={handleChange}
           aria-label="wrapped label tabs example"
-          sx={{ width: 250 }}
+          sx={{ width: mobile ? 200 : 250 }}
         >
           <Tab
             value={1}
             label={
               <Typography
-                variant="h6"
+                variant={mobile ? "body2" : small ? "body1" : "h6"}
                 sx={{ fontFamily: "Raleway", textTransform: "none" }}
               >
                 Reported
@@ -147,7 +149,7 @@ const ManagePost = ({ toast }) => {
             value={2}
             label={
               <Typography
-                variant="h6"
+                variant={mobile ? "body2" : small ? "body1" : "h6"}
                 sx={{ fontFamily: "Raleway", textTransform: "none" }}
               >
                 Moderate
@@ -161,8 +163,14 @@ const ManagePost = ({ toast }) => {
         <Divider />
       </Box>
 
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
-        <Box sx={{ p: 1, width: "70%" }}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: small ? "column" : "row",
+        }}
+      >
+        <Box sx={{ p: 1, width: small ? "100%" : medium ? "60%" : "70%" }}>
           {value === 1 ? (
             <Box
               sx={{
@@ -219,7 +227,8 @@ const ManagePost = ({ toast }) => {
             </Box>
           )}
         </Box>
-        <Box sx={{ p: 1, width: "30%" }}>
+
+        <Box sx={{ p: 1, width: small ? "100%" : medium ? "40%" : "30%" }}>
           {value === 1 ? (
             <Box
               sx={{
@@ -246,10 +255,13 @@ const ManagePost = ({ toast }) => {
                   }}
                 >
                   <BsFillFilePostFill
-                    style={{ fontSize: 80, color: "#B6C7AD" }}
+                    style={{
+                      fontSize: mobile ? 50 : small ? 60 : 80,
+                      color: "#B6C7AD",
+                    }}
                   />
                   <Typography
-                    variant="h5"
+                    variant={mobile ? "h6" : "h5"}
                     sx={{ mt: 1, fontFamily: "Raleway", color: "#B6C7AD" }}
                   >
                     Select a post
@@ -484,10 +496,14 @@ const ManagePost = ({ toast }) => {
                   }}
                 >
                   <BsFillFilePostFill
-                    style={{ fontSize: 80, color: "#B6C7AD" }}
+                    style={{
+                      fontSize: mobile ? 60 : small ? 70 : 80,
+                      color: "#B6C7AD",
+                    }}
                   />
                   <Typography
-                    variant="h5"
+                    align={"center"}
+                    variant={mobile ? "h6" : "h5"}
                     sx={{ mt: 1, fontFamily: "Raleway", color: "#B6C7AD" }}
                   >
                     Select a post

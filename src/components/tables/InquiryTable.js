@@ -9,8 +9,15 @@ import TableRow from "@mui/material/TableRow";
 import { Button, Divider, Typography } from "@mui/material";
 
 import { useGetConcernsQuery } from "../../app/services/landingApi";
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 export default function InquiryTable({ handleGoTo }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const { data } = useGetConcernsQuery(undefined, {
     refetchOnMountOrArgChange: "true",
     pollingInterval: 10000,
@@ -22,31 +29,31 @@ export default function InquiryTable({ handleGoTo }) {
     {
       id: "name",
       label: "Name",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 40 : 170,
       align: "center",
     },
     {
       id: "email",
       label: "Email",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 40 : 170,
       align: "center",
     },
     {
       id: "contact",
       label: "Contact",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "subject",
       label: "Subject",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 40 : 170,
       align: "center",
     },
     {
       id: "date",
       label: "Date",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 40 : 170,
       align: "center",
     },
   ];
@@ -109,6 +116,7 @@ export default function InquiryTable({ handleGoTo }) {
           variant="h5"
           sx={{
             fontFamily: "Raleway",
+            fontSize: mobile ? 10 : small ? 14 : 18,
             fontWeight: "Bold",
             flexGrow: 1,
           }}
@@ -122,6 +130,7 @@ export default function InquiryTable({ handleGoTo }) {
             color: "green",
             border: "none",
             fontFamily: "Raleway",
+            fontSize: mobile ? 10 : small ? 14 : 18,
             textTransform: "none",
           }}
         >
@@ -131,7 +140,7 @@ export default function InquiryTable({ handleGoTo }) {
 
       <Divider />
 
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -143,6 +152,7 @@ export default function InquiryTable({ handleGoTo }) {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -175,20 +185,47 @@ export default function InquiryTable({ handleGoTo }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     {row.first_name + " " + row.last_name}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.email}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.contact}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.subject}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {date}
                   </TableCell>
                 </TableRow>

@@ -8,8 +8,15 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import { useGetReportedAccountsQuery } from "../../app/services/manageApi";
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 export default function ReportedUsersTable({ handleClick }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const { data } = useGetReportedAccountsQuery(undefined, {
     refetchOnMountOrArgChange: "true",
     pollingInterval: 10000,
@@ -21,31 +28,31 @@ export default function ReportedUsersTable({ handleClick }) {
     {
       id: "name",
       label: "Name",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "email",
       label: "Email",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "contact",
       label: "Contact",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "address",
       label: "Address",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "reports",
       label: "Report Count",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
   ];
@@ -111,7 +118,7 @@ export default function ReportedUsersTable({ handleClick }) {
         overFlow: "hidden",
       }}
     >
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 490, minHeight: 490 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -123,6 +130,7 @@ export default function ReportedUsersTable({ handleClick }) {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -153,20 +161,47 @@ export default function ReportedUsersTable({ handleClick }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     {row.first_name + " " + row.last_name}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.email}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.contact}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.address}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.reports_count}
                   </TableCell>
                 </TableRow>

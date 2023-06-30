@@ -5,7 +5,7 @@ import { Grid, Stack, Box, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-const CounterCards = ({ title, location, value, icon, cardspace }) => {
+const CounterCards = ({ title, value, icon }) => {
   const theme = useTheme();
   const tablet = useMediaQuery(theme.breakpoints.down(1050));
   const mobile = useMediaQuery(theme.breakpoints.down(600));
@@ -13,7 +13,7 @@ const CounterCards = ({ title, location, value, icon, cardspace }) => {
     <Grid
       item
       sx={{
-        width: mobile ? "100%" : tablet ? "50%" : "25%",
+        width: tablet ? "50%" : "25%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -22,7 +22,7 @@ const CounterCards = ({ title, location, value, icon, cardspace }) => {
       <Box
         sx={{
           width: "95%",
-          height: 150,
+          height: mobile ? 100 : 150,
           mt: 2,
           borderRadius: 3,
           overflow: "hidden",
@@ -46,12 +46,12 @@ const CounterCards = ({ title, location, value, icon, cardspace }) => {
               width: "100%",
               height: "100%",
               display: "flex",
-              p: 3,
+              p: mobile ? 2 : 3,
               flexDirection: "column",
             }}
           >
             <Typography
-              variant="h7"
+              variant={mobile ? "caption" : "h6"}
               sx={{
                 fontFamily: "Raleway",
                 fontWeight: "Light",
@@ -61,7 +61,7 @@ const CounterCards = ({ title, location, value, icon, cardspace }) => {
               {title}
             </Typography>
             <Typography
-              variant="h2"
+              variant={mobile ? "h5" : "h2"}
               sx={{
                 width: "100%",
                 fontFamily: "Raleway",

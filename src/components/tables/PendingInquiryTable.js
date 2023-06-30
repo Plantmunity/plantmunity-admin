@@ -7,6 +7,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 import {
   useGetConcernsQuery,
   useProcessConcernMutation,
@@ -15,6 +19,10 @@ import {
 import PendingConcernDialog from "../dialogs/PendingConcernDialog";
 
 export default function PendingInquiryTable({ toast }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [openDialog, setOpenDialog] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -52,31 +60,31 @@ export default function PendingInquiryTable({ toast }) {
     {
       id: "name",
       label: "Name",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "email",
       label: "Email",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "contact",
       label: "Contact",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "subject",
       label: "Subject",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "date",
       label: "Date",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
   ];
@@ -134,7 +142,7 @@ export default function PendingInquiryTable({ toast }) {
         overFlow: "hidden",
       }}
     >
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -146,6 +154,7 @@ export default function PendingInquiryTable({ toast }) {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -192,20 +201,47 @@ export default function PendingInquiryTable({ toast }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     {row.first_name + " " + row.last_name}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.email}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.contact}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.subject}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {date}
                   </TableCell>
                 </TableRow>

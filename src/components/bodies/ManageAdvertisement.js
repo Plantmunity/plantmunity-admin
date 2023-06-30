@@ -13,24 +13,24 @@ import { MdOutlineAddCircleOutline } from "react-icons/md";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import AddFaqDialog from "../dialogs/AddFaqDialog";
-import { useGetFaqsQuery } from "../../app/services/landingApi";
-import FaqCard from "../cards/FaqCard";
+import AdsCard from "../cards/AdsCard";
+import AddAdsDialog from "../dialogs/AddAdsDialog";
+import { useGetAllAdsQuery } from "../../app/services/manageApi";
 
-export default function ManageFAQs({ toast }) {
+export default function ManageAdvertisement({ toast }) {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
   const small = useMediaQuery(theme.breakpoints.down(900));
-  const { data } = useGetFaqsQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
 
-  const faqsArray = data ? data.faqs : [];
   const [openAdd, setOpenAdd] = useState(false);
 
   const handleOpenAdd = () => {
     setOpenAdd(!openAdd);
   };
+
+  const { data } = useGetAllAdsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   return (
     <Stack
@@ -50,7 +50,7 @@ export default function ManageFAQs({ toast }) {
             ml: mobile ? 0 : 3,
           }}
         >
-          FAQs Management
+          Advertisements Management
         </Typography>
         <Button
           onClick={() => handleOpenAdd()}
@@ -58,7 +58,7 @@ export default function ManageFAQs({ toast }) {
           variant="contained"
           sx={{ textTransform: "none", color: "white", fontFamily: "Arvo" }}
         >
-          Add FAQ
+          Add Ads
         </Button>
       </Stack>
       <Box sx={{ width: "100%", mt: 1 }}>
@@ -66,33 +66,48 @@ export default function ManageFAQs({ toast }) {
       </Box>
       <Grid
         container
-        direction="column"
+        direction="row"
         alignItems="center"
         sx={{
           width: "100%",
           mt: 2,
         }}
       >
-        {faqsArray.map(({ answer, status, question, id }) => {
-          return (
-            <Box key={id} sx={{ width: "100%" }}>
-              <FaqCard
-                answer={answer}
-                status={status}
-                question={question}
-                id={id}
-                toast={(message) => toast(message)}
-              />
-            </Box>
-          );
-        })}
+        {data?.ads.map(
+          ({ image, title, owner, link, id, status, email, type, contact }) => {
+            return (
+              <Grid
+                key={id}
+                item
+                sx={{
+                  width: mobile ? "100%" : small ? "50%" : "25%",
+                  mt: 1,
+                }}
+              >
+                <AdsCard
+                  image={image}
+                  link={link}
+                  name={owner}
+                  title={title}
+                  status={status}
+                  type={type}
+                  email={email}
+                  contact={contact}
+                  id={id}
+                  toast={(message) => toast(message)}
+                />
+              </Grid>
+            );
+          }
+        )}
         <Dialog
           maxWidth={false}
           scroll={"body"}
           open={openAdd}
           onClose={handleOpenAdd}
+          fullScreen={mobile}
         >
-          <AddFaqDialog
+          <AddAdsDialog
             handleClose={() => handleOpenAdd()}
             toast={(message) => toast(message)}
           />

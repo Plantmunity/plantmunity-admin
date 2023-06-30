@@ -10,7 +10,15 @@ import TableRow from "@mui/material/TableRow";
 import { useGetDoneConcernsQuery } from "../../app/services/landingApi";
 import ProcessedConcernDialog from "../dialogs/ProcessedConcernDialog";
 
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 export default function ProcessedConcernTable() {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [openDialog, setOpenDialog] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -50,13 +58,13 @@ export default function ProcessedConcernTable() {
     {
       id: "name",
       label: "Name",
-      minWidth: 170,
+      minWidth: mobile ? 120 : small ? 150 : 170,
       align: "center",
     },
     {
       id: "email",
       label: "Email",
-      minWidth: 170,
+      minWidth: mobile ? 120 : small ? 150 : 170,
       align: "center",
     },
     {
@@ -68,13 +76,13 @@ export default function ProcessedConcernTable() {
     {
       id: "subject",
       label: "Subject",
-      minWidth: 170,
+      minWidth: mobile ? 120 : small ? 150 : 170,
       align: "center",
     },
     {
       id: "date",
       label: "Date",
-      minWidth: 170,
+      minWidth: mobile ? 120 : small ? 150 : 170,
       align: "center",
     },
   ];
@@ -136,7 +144,7 @@ export default function ProcessedConcernTable() {
         overFlow: "hidden",
       }}
     >
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -148,6 +156,7 @@ export default function ProcessedConcernTable() {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -195,20 +204,47 @@ export default function ProcessedConcernTable() {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     {row.first_name + " " + row.last_name}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.email}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.contact}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.subject}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {date}
                   </TableCell>
                 </TableRow>

@@ -10,7 +10,15 @@ import { SearchField } from "../basic/StyledComponents";
 import { SearchRounded } from "@mui/icons-material";
 import { useGetPostedProductsQuery } from "../../app/services/manageApi";
 
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 export default function ProductsTable({ handleClick }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [search, setSearch] = useState("");
   const [finalSearch, setFinalSearch] = useState("");
 
@@ -42,31 +50,31 @@ export default function ProductsTable({ handleClick }) {
     {
       id: "image",
       label: "Image",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "user",
       label: "User ID",
-      minWidth: 100,
+      minWidth: mobile ? 90 : 100,
       align: "center",
     },
     {
       id: "product",
       label: "Product Name",
-      minWidth: 170,
+      minWidth: mobile ? 110 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "category",
       label: "Category",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
     {
       id: "date",
       label: "Posted on",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 140 : 170,
       align: "center",
     },
   ];
@@ -158,7 +166,12 @@ export default function ProductsTable({ handleClick }) {
           <SearchRounded sx={{ color: "gray" }} />
           <SearchField
             variant="outlined"
-            inputProps={{ style: { fontFamily: "raleway" } }}
+            inputProps={{
+              style: {
+                fontFamily: "raleway",
+                fontSize: mobile ? 10 : small ? 14 : 18,
+              },
+            }}
             placeholder={"Search user"}
             value={search}
             onChange={handleSearchChange}
@@ -167,7 +180,7 @@ export default function ProductsTable({ handleClick }) {
         </Stack>
       </Box>
       <Divider />
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -179,6 +192,7 @@ export default function ProductsTable({ handleClick }) {
                     minWidth: column.minWidth,
                     backgroundColor: "white",
                     fontFamily: "raleway",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontWeight: "bold",
                   }}
                 >
@@ -223,7 +237,10 @@ export default function ProductsTable({ handleClick }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
                   >
                     <Box
                       sx={{
@@ -245,16 +262,40 @@ export default function ProductsTable({ handleClick }) {
                       />
                     </Box>
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.user?.id}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.product}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {row.category}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontFamily: "Raleway",
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                    }}
+                  >
                     {date}
                   </TableCell>
                 </TableRow>

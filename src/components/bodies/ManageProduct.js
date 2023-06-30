@@ -13,6 +13,8 @@ import ProductsTable from "../tables/ProductsTable";
 const ManageProduct = ({ toast }) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+  const medium = useMediaQuery(theme.breakpoints.down(1100));
 
   const [verifyProduct] = useVerifyProductMutation();
 
@@ -66,7 +68,7 @@ const ManageProduct = ({ toast }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <Typography
-        variant="h4"
+        variant={mobile ? "body1" : small ? "h6" : "h4"}
         sx={{
           fontFamily: "Arvo",
           fontWeight: "bold",
@@ -81,8 +83,14 @@ const ManageProduct = ({ toast }) => {
         <Divider />
       </Box>
 
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
-        <Box sx={{ p: 1, width: "70%" }}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: small ? "column" : "row",
+        }}
+      >
+        <Box sx={{ p: 1, width: small ? "100%" : medium ? "60%" : "70%" }}>
           <Box
             sx={{
               width: "100%",
@@ -120,7 +128,7 @@ const ManageProduct = ({ toast }) => {
             />
           </Box>
         </Box>
-        <Box sx={{ p: 1, width: "30%" }}>
+        <Box sx={{ p: 1, width: small ? "100%" : medium ? "40%" : "30%" }}>
           <Box
             sx={{
               width: "100%",
@@ -146,10 +154,15 @@ const ManageProduct = ({ toast }) => {
                   transform: "translate(-50%, -50%)",
                 }}
               >
-                <RiPlantFill style={{ fontSize: 80, color: "#B6C7AD" }} />
+                <RiPlantFill
+                  style={{
+                    fontSize: mobile ? 50 : small ? 70 : 80,
+                    color: "#B6C7AD",
+                  }}
+                />
                 <Typography
-                  align="center"
-                  variant="h5"
+                  align={"center"}
+                  variant={mobile ? "h6" : "h5"}
                   sx={{ mt: 1, fontFamily: "Raleway", color: "#B6C7AD" }}
                 >
                   Select a product

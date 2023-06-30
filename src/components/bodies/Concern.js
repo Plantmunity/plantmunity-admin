@@ -9,7 +9,7 @@ import ProcessedConcernTable from "../tables/ProcessedInquiryTable";
 const Concern = ({ toast }) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
-
+  const small = useMediaQuery(theme.breakpoints.down(900));
   const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
@@ -19,7 +19,7 @@ const Concern = ({ toast }) => {
     <Box sx={{ width: "100%" }}>
       <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
         <Typography
-          variant="h4"
+          variant={mobile ? "body1" : small ? "h6" : "h4"}
           sx={{
             fontFamily: "Arvo",
             fontWeight: "bold",
@@ -34,13 +34,13 @@ const Concern = ({ toast }) => {
           value={value}
           onChange={handleChange}
           aria-label="wrapped label tabs example"
-          sx={{ width: 250 }}
+          sx={{ width: small ? 180 : 250 }}
         >
           <Tab
             value={1}
             label={
               <Typography
-                variant="h6"
+                variant={mobile ? "body2" : small ? "body1" : "h6"}
                 sx={{ fontFamily: "Raleway", textTransform: "none" }}
               >
                 Pending
@@ -51,7 +51,7 @@ const Concern = ({ toast }) => {
             value={2}
             label={
               <Typography
-                variant="h6"
+                variant={mobile ? "body2" : small ? "body1" : "h6"}
                 sx={{ fontFamily: "Raleway", textTransform: "none" }}
               >
                 Processed

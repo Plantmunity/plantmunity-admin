@@ -10,7 +10,15 @@ import { SearchField } from "../basic/StyledComponents";
 import { SearchRounded } from "@mui/icons-material";
 import { useGetPostedPostsQuery } from "../../app/services/manageApi";
 
+//For Responsivity
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 export default function PostsTable({ handleClick }) {
+  const theme = useTheme();
+  const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+
   const [search, setSearch] = useState("");
   const [finalSearch, setFinalSearch] = useState("");
 
@@ -42,7 +50,7 @@ export default function PostsTable({ handleClick }) {
     {
       id: "image",
       label: "Image",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 150 : 170,
       align: "center",
     },
     {
@@ -54,19 +62,19 @@ export default function PostsTable({ handleClick }) {
     {
       id: "caption",
       label: "Caption",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 150 : 170,
       align: "center",
     },
     {
       id: "status",
       label: "Status",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 150 : 170,
       align: "center",
     },
     {
       id: "date",
       label: "Posted on",
-      minWidth: 170,
+      minWidth: mobile ? 90 : small ? 150 : 170,
       align: "center",
     },
   ];
@@ -100,8 +108,9 @@ export default function PostsTable({ handleClick }) {
           width: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: mobile ? "center" : "flex-end",
           px: 2,
+          mt: mobile ? 3 : null,
         }}
       >
         <Stack
@@ -121,7 +130,12 @@ export default function PostsTable({ handleClick }) {
           <SearchRounded sx={{ color: "gray" }} />
           <SearchField
             variant="outlined"
-            inputProps={{ style: { fontFamily: "raleway" } }}
+            inputProps={{
+              style: {
+                fontSize: mobile ? 10 : small ? 14 : 18,
+                fontFamily: "raleway",
+              },
+            }}
             placeholder={"Search post"}
             value={search}
             onChange={handleSearchChange}
@@ -130,7 +144,7 @@ export default function PostsTable({ handleClick }) {
         </Stack>
       </Box>
       <Divider />
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 440, minHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead bgcolor="green">
             <TableRow>
@@ -141,6 +155,7 @@ export default function PostsTable({ handleClick }) {
                   style={{
                     minWidth: column.minWidth,
                     backgroundColor: "white",
+                    fontSize: mobile ? 10 : small ? 14 : 18,
                     fontFamily: "raleway",
                     fontWeight: "bold",
                   }}
@@ -179,12 +194,15 @@ export default function PostsTable({ handleClick }) {
                     component="th"
                     scope="row"
                     align="center"
-                    sx={{ fontFamily: "Raleway" }}
+                    sx={{
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                      fontFamily: "Raleway",
+                    }}
                   >
                     <Box
                       sx={{
                         width: "100%",
-                        height: 100,
+                        height: mobile ? 60 : small ? 80 : 100,
                         display: "flex",
                         direction: "column",
                         alignItems: "center",
@@ -201,16 +219,40 @@ export default function PostsTable({ handleClick }) {
                       />
                     </Box>
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                      fontFamily: "Raleway",
+                    }}
+                  >
                     {row.user?.id}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                      fontFamily: "Raleway",
+                    }}
+                  >
                     {row.caption}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                      fontFamily: "Raleway",
+                    }}
+                  >
                     {row.status}
                   </TableCell>
-                  <TableCell align="center" sx={{ fontFamily: "Raleway" }}>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      fontSize: mobile ? 10 : small ? 14 : 18,
+                      fontFamily: "Raleway",
+                    }}
+                  >
                     {date}
                   </TableCell>
                 </TableRow>

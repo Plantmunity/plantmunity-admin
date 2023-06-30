@@ -31,7 +31,7 @@ export default function FeedbackViewer({ toast }) {
     >
       <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
         <Typography
-          variant="h4"
+          variant={mobile ? "body1" : small ? "h6" : "h4"}
           sx={{
             fontFamily: "Arvo",
             fontWeight: "bold",

@@ -18,7 +18,7 @@ import AddAdminDialog from "../dialogs/AddAdminDialog";
 export default function ManageAdmin({ toast }) {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
-
+  const small = useMediaQuery(theme.breakpoints.down(900));
   const [openAdd, setOpenAdd] = useState(false);
 
   const handleOpenAdd = () => {
@@ -35,7 +35,7 @@ export default function ManageAdmin({ toast }) {
     >
       <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
         <Typography
-          variant="h4"
+          variant={mobile ? "body1" : small ? "h6" : "h4"}
           sx={{
             fontFamily: "Arvo",
             fontWeight: "bold",

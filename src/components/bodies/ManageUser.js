@@ -26,6 +26,8 @@ import { FaUserCircle } from "react-icons/fa";
 const ManageUsers = ({ toast }) => {
   const theme = useTheme();
   const mobile = useMediaQuery(theme.breakpoints.down(600));
+  const small = useMediaQuery(theme.breakpoints.down(900));
+  const medium = useMediaQuery(theme.breakpoints.down(1100));
 
   const [value, setValue] = React.useState(1);
   const [unbanUser] = useUnbanUserMutation();
@@ -144,7 +146,7 @@ const ManageUsers = ({ toast }) => {
     <Box sx={{ width: "100%" }}>
       <Stack direction="row" alignItems="center" sx={{ width: "100%" }}>
         <Typography
-          variant="h4"
+          variant={mobile ? "body1" : small ? "h6" : "h4"}
           sx={{
             fontFamily: "Arvo",
             fontWeight: "bold",
@@ -159,13 +161,13 @@ const ManageUsers = ({ toast }) => {
           value={value}
           onChange={handleChange}
           aria-label="wrapped label tabs example"
-          sx={{ width: 250 }}
+          sx={{ width: small ? 180 : 250 }}
         >
           <Tab
             value={1}
             label={
               <Typography
-                variant="h6"
+                variant={mobile ? "body2" : small ? "body1" : "h6"}
                 sx={{ fontFamily: "Raleway", textTransform: "none" }}
               >
                 Reported
@@ -176,7 +178,7 @@ const ManageUsers = ({ toast }) => {
             value={2}
             label={
               <Typography
-                variant="h6"
+                variant={mobile ? "body2" : small ? "body1" : "h6"}
                 sx={{ fontFamily: "Raleway", textTransform: "none" }}
               >
                 Users
@@ -190,8 +192,14 @@ const ManageUsers = ({ toast }) => {
         <Divider />
       </Box>
 
-      <Box sx={{ width: "100%", display: "flex", flexDirection: "row" }}>
-        <Box sx={{ p: 1, width: "70%" }}>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          flexDirection: small ? "column" : "row",
+        }}
+      >
+        <Box sx={{ p: 1, width: small ? "100%" : medium ? "60%" : "70%" }}>
           {value === 1 ? (
             <Box
               sx={{
@@ -270,7 +278,7 @@ const ManageUsers = ({ toast }) => {
             </Box>
           )}
         </Box>
-        <Box sx={{ p: 1, width: "30%" }}>
+        <Box sx={{ p: 1, width: small ? "100%" : medium ? "40%" : "30%" }}>
           {value === 1 ? (
             <Box
               sx={{
@@ -298,7 +306,8 @@ const ManageUsers = ({ toast }) => {
                 >
                   <FaUserCircle style={{ fontSize: 80, color: "#B6C7AD" }} />
                   <Typography
-                    variant="h5"
+                    align={"center"}
+                    variant={mobile ? "h6" : "h5"}
                     sx={{ mt: 1, fontFamily: "Raleway", color: "#B6C7AD" }}
                   >
                     Select a user
@@ -414,9 +423,14 @@ const ManageUsers = ({ toast }) => {
                     transform: "translate(-50%, -50%)",
                   }}
                 >
-                  <FaUserCircle style={{ fontSize: 80, color: "#B6C7AD" }} />
+                  <FaUserCircle
+                    style={{
+                      fontSize: mobile ? 50 : small ? 70 : 80,
+                      color: "#B6C7AD",
+                    }}
+                  />
                   <Typography
-                    variant="h5"
+                    variant={mobile ? "h6" : "h5"}
                     sx={{ mt: 1, fontFamily: "Raleway", color: "#B6C7AD" }}
                   >
                     Select a user
