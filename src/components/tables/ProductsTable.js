@@ -172,7 +172,7 @@ export default function ProductsTable({ handleClick }) {
                 fontSize: mobile ? 10 : small ? 14 : 18,
               },
             }}
-            placeholder={"Search user"}
+            placeholder={"Search product"}
             value={search}
             onChange={handleSearchChange}
             size="small"
@@ -228,7 +228,8 @@ export default function ProductsTable({ handleClick }) {
                       row.product,
                       row.description,
                       row.user,
-                      date
+                      date,
+                      row.variants
                     );
                   }}
                   sx={{ "&:hover": { bgcolor: "#F5F5F7", cursor: "pointer" } }}

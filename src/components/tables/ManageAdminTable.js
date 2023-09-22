@@ -223,7 +223,7 @@ export default function ManageAdminTable({ toast }) {
                 fontSize: mobile ? 10 : small ? 14 : 18,
               },
             }}
-            placeholder={"Search user"}
+            placeholder={"Search admin"}
             value={search}
             onChange={handleSearchChange}
             size="small"

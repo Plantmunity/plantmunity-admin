@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Box, Button, Dialog, Divider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  Grid,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 import AddReportNoteDialog from "../dialogs/AddReportNoteDialog";
 
 //For Responsivity
@@ -30,14 +38,16 @@ const ManageProduct = ({ toast }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [user, setUser] = useState([]);
+  const [variants, setVariants] = useState([]);
 
-  const handleClick = (id, image, title, description, user, date) => {
+  const handleClick = (id, image, title, description, user, date, variant) => {
     setId(id);
     setImage(image);
     setDate(date);
     setTitle(title);
     setDescription(description);
     setUser(user);
+    setVariants(variant);
   };
 
   const handleSucess = () => {
@@ -47,6 +57,7 @@ const ManageProduct = ({ toast }) => {
     setTitle("");
     setDescription("");
     setUser([]);
+    setVariants([]);
   };
 
   const time_stamp = new Date(date);
@@ -233,6 +244,49 @@ const ManageProduct = ({ toast }) => {
                 >
                   {description}
                 </Typography>
+
+                <Typography
+                  variant={"caption"}
+                  sx={{
+                    fontFamily: "Raleway",
+                    fontWeight: "bold",
+                    width: "100%",
+                    color: "#7f7f7f",
+                    mt: 2,
+                  }}
+                >
+                  {"Variants & Prices"}
+                </Typography>
+
+                <Grid
+                  container
+                  direction="row"
+                  alignItems="center"
+                  sx={{ width: "100%" }}
+                >
+                  {variants?.map((variant) => {
+                    return (
+                      <Grid
+                        item
+                        sx={{
+                          p: 0.5,
+                          px: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          border: "1px solid black",
+                          borderRadius: 5,
+                          ml: 1,
+                          mt: 1,
+                        }}
+                      >
+                        <Typography variant={"body2"}>
+                          {variant.attribute + " - " + variant.price}
+                        </Typography>
+                      </Grid>
+                    );
+                  })}
+                </Grid>
 
                 <Stack direction="row" sx={{ width: "100%", mt: 1 }}>
                   <Stack direction="column">

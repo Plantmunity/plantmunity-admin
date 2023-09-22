@@ -80,7 +80,7 @@ export default function InquiryTable({ handleGoTo }) {
     };
   }
 
-  const rows = concernsArray.map(
+  const rows = concernsArray?.map(
     ({
       id,
       first_name,
@@ -162,7 +162,7 @@ export default function InquiryTable({ handleGoTo }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => {
+            {rows?.map((row) => {
               const time_stamp = new Date(row.created_at);
 
               function getMonthName(monthNumber) {
