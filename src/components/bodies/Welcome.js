@@ -16,7 +16,7 @@ const Welcome = () => {
     setTimeout(() => {
       setUser();
       if (isSuccess) {
-        navigate("/home");
+        navigate("/admin");
       }
       if (error) {
         dispatch(resetCredentials());

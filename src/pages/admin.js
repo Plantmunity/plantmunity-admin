@@ -1,17 +1,12 @@
-import React from 'react'
-import Sidebar from '../components/navigation/Sidebar'
+import React from "react";
+import Sidebar from "../components/navigation/Sidebar";
 
 const admin = () => {
   return (
-    <React.Fragment >
-        
-        <div>admin</div>
-        <Sidebar />
-        
+    <React.Fragment>
+      <Sidebar />
     </React.Fragment>
-    
+  );
+};
 
-  )
-}
-
-export default admin
+export default admin;
