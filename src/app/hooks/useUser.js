@@ -8,7 +8,7 @@ export default function useUser() {
   const dispatch = useDispatch(); //for using the function in in userSlice[redux]
 
   const [count, setCount] = useState(0); // State, which will help in treggering the getUser/useLazyGetUserQuery
-  const [getUser, { data, isSuccess }] = useLazyGetUserQuery(); //destructuring the useLazyGetuserQuery and getting the, its data once loaded.
+  const [getUser, { data, isSuccess, error }] = useLazyGetUserQuery(); //destructuring the useLazyGetuserQuery and getting the, its data once loaded.
 
   //Once count's state change the use Effect will be triggered
   // 1. getUser() is triggered, and expecting to return a json to data
@@ -47,5 +47,5 @@ export default function useUser() {
     setCount(1);
   };
 
-  return { setUser, isSuccess };
+  return { setUser, isSuccess, error };
 }

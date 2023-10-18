@@ -15,6 +15,7 @@ const Welcome = () => {
     setLoading(true);
     setTimeout(() => {
       setUser();
+
       if (isSuccess) {
         navigate("/admin");
       }

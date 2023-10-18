@@ -500,7 +500,7 @@ export default function Sidebar() {
           )}
         </List>
       </Drawer>
-      <Box component="main" sx={{ width: small ? "90%" : "100%", p: 3, pt: 0 }}>
+      <Box component="main" sx={{ width: small ? "90%" : "100%", p: 3, pt: 3 }}>
         <DrawerHeader />
 
         {selectedValue === 1 ? (
