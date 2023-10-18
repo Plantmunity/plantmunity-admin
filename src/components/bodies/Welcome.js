@@ -3,17 +3,25 @@ import React, { useEffect, useState } from "react";
 import useUser from "../../app/hooks/useUser";
 import { navigate } from "gatsby";
 import { RingLoader } from "react-spinners";
-
+import { useDispatch } from "react-redux";
+import { resetPersonalDetails } from "../../app/persist/account/userSlice";
+import { resetCredentials } from "../../app/persist/authentication/authSlice";
 const Welcome = () => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { setUser, isSuccess } = useUser();
+  const { setUser, isSuccess, error } = useUser();
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setUser();
       if (isSuccess) {
-        navigate("/admin");
+        navigate("/home");
+      }
+      if (error) {
+        dispatch(resetCredentials());
+        dispatch(resetPersonalDetails());
+        navigate("/");
       }
     }, 3000);
   }, [isSuccess, setUser]);
