@@ -7,11 +7,12 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
+    "develop": "NODE_OPTIONS='--max-old-space-size=2048' gatsby develop",
+    "start": "NODE_OPTIONS='--max-old-space-size=2048' gatsby develop",
+    "build": "NODE_OPTIONS='--max-old-space-size=2048' gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "lazybox": "NODE_OPTIONS='--max-old-space-size=2048' gatsby develop -H 0.0.0.0 --port 8000"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
